@@ -23,6 +23,10 @@ func main() {
 }
 
 func Hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("got / request\n")
-	io.WriteString(w, "This is my website v3 !\n")
+	
+	name := os.Getenv("NAME")
+	age := os.Getenv("AGE")
+	
+	io.WriteString(w, "This is my website v4!\n")
+	fmt.Fprintf(w, "Hello, I'm %s. I'm %s", name, age)
 }
