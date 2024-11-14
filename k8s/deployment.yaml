@@ -18,8 +18,6 @@ spec:
       containers:
         - name: goserver
           image: jamesfrj/fc-go-server:v4
-          env:
-            - name: NAME
-              value: "James"
-            - name: AGE
-              value: "44"  
+          envFrom:
+            - configMapRef: 
+                name: goserver-env
