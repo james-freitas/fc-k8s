@@ -17,10 +17,12 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: jamesfrj/fc-go-server:v5
+          image: jamesfrj/fc-go-server:v6
           envFrom:
             - configMapRef: 
                 name: goserver-env
+            - secretRef:
+                name: goserver-secret
 
           volumeMounts:
             - mountPath: "/go/myfamily"

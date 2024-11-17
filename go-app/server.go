@@ -13,6 +13,7 @@ func main() {
 	
 	http.HandleFunc("/", Hello)
 	http.HandleFunc("/configmap", ConfigMap)
+	http.HandleFunc("/secret", Secret)
 
 	fmt.Printf("Server starting on 8080 port \n")
 
@@ -26,7 +27,6 @@ func main() {
 }
 
 func Hello(w http.ResponseWriter, r *http.Request) {
-	
 	name := os.Getenv("NAME")
 	age := os.Getenv("AGE")
 	
@@ -35,12 +35,16 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 }
 
 func ConfigMap(w http.ResponseWriter, r *http.Request) {
-
 	data, err := os.ReadFile("/go/myfamily/family.txt")
 	if err != nil {
 		log.Fatalf("Error reading file: ", err)
 	}
 	fmt.Fprintf(w, "My family: %s", string(data))
-
-
 }
+
+func Secret(w http.ResponseWriter, r *http.Request) {
+	user := os.Getenv("USER")
+	password := os.Getenv("PASSWORD")
+	fmt.Fprintf(w, "User: %s. Password: %s", user, password)
+}
+
