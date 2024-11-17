@@ -17,7 +17,19 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: jamesfrj/fc-go-server:v4
+          image: jamesfrj/fc-go-server:v5
           envFrom:
             - configMapRef: 
                 name: goserver-env
+
+          volumeMounts:
+            - mountPath: "/go/myfamily"
+              name: config
+
+      volumes:
+        - name: config
+          configMap:
+            name: configmap-family
+            items:
+            - key: members
+              path: "family.txt"

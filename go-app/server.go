@@ -4,12 +4,15 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 )
 
 func main() {
+	
 	http.HandleFunc("/", Hello)
+	http.HandleFunc("/configmap", ConfigMap)
 
 	fmt.Printf("Server starting on 8080 port \n")
 
@@ -29,4 +32,15 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 	
 	io.WriteString(w, "This is my website v4!\n")
 	fmt.Fprintf(w, "Hello, I'm %s. I'm %s", name, age)
+}
+
+func ConfigMap(w http.ResponseWriter, r *http.Request) {
+
+	data, err := os.ReadFile("/go/myfamily/family.txt")
+	if err != nil {
+		log.Fatalf("Error reading file: ", err)
+	}
+	fmt.Fprintf(w, "My family: %s", string(data))
+
+
 }
