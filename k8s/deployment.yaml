@@ -17,15 +17,24 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: jamesfrj/fc-go-server:v6.1
-          livenessProbe:
+          image: jamesfrj/fc-go-server:v6.2
+
+          readinessProbe:
             httpGet: 
               path: /health
               port: 8080
-            periodSeconds: 5
-            failureThreshold: 3
-            timeoutSeconds: 1
-            successThreshold: 1
+            periodSeconds: 3
+            failureThreshold: 1
+            initialDelaySeconds: 10  
+
+          # livenessProbe:
+          #   httpGet: 
+          #     path: /health
+          #     port: 8080
+          #   periodSeconds: 5
+          #   failureThreshold: 3
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
 
           envFrom:
             - configMapRef: 
