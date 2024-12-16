@@ -19,13 +19,19 @@ spec:
         - name: goserver
           image: jamesfrj/fc-go-server:v6.3
 
+          startupProbe:
+            httpGet: 
+              path: /health
+              port: 8080
+            periodSeconds: 3
+            failureThreshold: 30
+
           readinessProbe:
             httpGet: 
               path: /health
               port: 8080
             periodSeconds: 3
             failureThreshold: 1
-            initialDelaySeconds: 10  
 
           livenessProbe:
             httpGet: 
@@ -35,7 +41,6 @@ spec:
             failureThreshold: 1
             timeoutSeconds: 1
             successThreshold: 1
-            initialDelaySeconds: 15
 
           envFrom:
             - configMapRef: 
