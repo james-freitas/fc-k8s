@@ -17,14 +17,14 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: jamesfrj/fc-go-server:v6.3
+          image: jamesfrj/fc-go-server:v6.4
 
           resources:
             requests:
-              cpu: "0.3"
+              cpu: "0.05"
               memory: 20Mi
             limits:
-              cpu: "0.3"
+              cpu: "0.05"
               memory: 20Mi  
 
           startupProbe:
