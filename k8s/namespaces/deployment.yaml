@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+  labels:
+    app: server
+spec:
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      name: "server"
+      labels:
+        app: "server"
+    spec:
+      serviceAccount: server
+      containers:
+        - name: server
+          image: jamesfrj/hello-express
+          resources:
+            requests:
+              cpu: "0.05"
+              memory: 20Mi
+            limits:
+              cpu: "0.05"
+              memory: 20Mi  
